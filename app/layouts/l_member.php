@@ -24,7 +24,7 @@
 
 <body style="background-image: url('https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg'); background-size: cover; background-attachment: fixed; background-position: center; position: relative;">
   <!-- Mask -->
-  <span class="mask bg-gradient-primary opacity-6" style="position: absolute; top: 0; left: 0; width: 100%; height: 100vh; z-index: -1;"></span>
+  <span class="mask bg-gradient-primary opacity-6" style="position: absolute; top: 0; left: 0; width: 100%; min-height: 100vh; z-index: -1;"></span>
   <div class="position-fixed top-5 start-50 translate-middle p-3" style="z-index: 1100">
     <?php if (session()->getFlashData('failed')) : ?>
       <div class="toast align-items-center text-bg-danger border-0" role="alert" aria-live="assertive" aria-atomic="true">
