@@ -32,8 +32,9 @@
         </tbody>
       </table>
     </div>
-    <nav aria-label="Page navigation example" class="custom-navigation">
-      <ul class="pagination" id="pagination">
+    <nav aria-label="Page navigation" class="mt-4 mx-4">
+      <ul class="pagination d-flex gap-1" id="pagination">
+        <!-- Dynamic pagination will be injected by JavaScript -->
       </ul>
     </nav>
   </div>
@@ -46,35 +47,66 @@
   var urlParams = new URLSearchParams(currentURL);
   var pageParam = urlParams.get('page');
 
-  // PAGINATION
   function handlePagination(pageNumber) {
-    window.location.replace(`<?php echo base_url(); ?>admin/books?page=${pageNumber}`);
+    window.location.href = `<?php echo base_url(); ?>admin/borrowings?page=${pageNumber}`;
   }
 
-  var paginationContainer = document.getElementById('pagination');
-  var totalPages = <?= $pager["totalPages"] ?>;
+  const paginationContainer = document.getElementById('pagination');
+  const totalPages = <?= $pager["totalPages"] ?>;
+  const currentPage = <?= $pager["currentPage"] ?>;
+
   if (totalPages >= 1) {
-    for (var i = 1; i <= totalPages; i++) {
-      var pageItem = document.createElement('li');
+    // Previous button
+    const prevItem = document.createElement('li');
+    prevItem.classList.add('page-item');
+    if (currentPage === 1) {
+      prevItem.classList.add('disabled');
+    }
+    const prevLink = document.createElement('a');
+    prevLink.classList.add('page-link');
+    prevLink.href = 'javascript:void(0);';
+    prevLink.setAttribute('aria-label', 'Previous');
+    prevLink.innerHTML = '&laquo;';
+    prevLink.addEventListener('click', function() {
+      if (currentPage > 1) handlePagination(currentPage - 1);
+    });
+    prevItem.appendChild(prevLink);
+    paginationContainer.appendChild(prevItem);
+
+    // Numbered pages
+    for (let i = 1; i <= totalPages; i++) {
+      const pageItem = document.createElement('li');
       pageItem.classList.add('page-item');
-      pageItem.classList.add('primary');
-      if (i === <?= $pager["currentPage"] ?>) {
-        pageItem.classList.add('active');
-      }
+      if (i === currentPage) pageItem.classList.add('active');
 
-      var pageLink = document.createElement('a');
+      const pageLink = document.createElement('a');
       pageLink.classList.add('page-link');
-      pageLink.href = 'javascript:void(0);'
+      pageLink.href = 'javascript:void(0);';
       pageLink.textContent = i;
-
       pageLink.addEventListener('click', function() {
-        var pageNumber = parseInt(this.textContent);
-        handlePagination(pageNumber);
+        handlePagination(i);
       });
 
       pageItem.appendChild(pageLink);
       paginationContainer.appendChild(pageItem);
     }
+
+    // Next button
+    const nextItem = document.createElement('li');
+    nextItem.classList.add('page-item');
+    if (currentPage === totalPages) {
+      nextItem.classList.add('disabled');
+    }
+    const nextLink = document.createElement('a');
+    nextLink.classList.add('page-link');
+    nextLink.href = 'javascript:void(0);';
+    nextLink.setAttribute('aria-label', 'Next');
+    nextLink.innerHTML = '&raquo;';
+    nextLink.addEventListener('click', function() {
+      if (currentPage < totalPages) handlePagination(currentPage + 1);
+    });
+    nextItem.appendChild(nextLink);
+    paginationContainer.appendChild(nextItem);
   }
 </script>
 <?= $this->endSection() ?>

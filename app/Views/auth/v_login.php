@@ -15,7 +15,7 @@
         <input type="password" class="form-control form-control-lg" placeholder="Password" aria-label="Password" name="password_hash">
       </div>
       <div class="form-check form-switch">
-        <input class="form-check-input" type="checkbox" id="rememberMe">
+        <input class="form-check-input" type="checkbox" id="rememberMe" name="rememberMe">
         <label class="form-check-label" for="rememberMe">Remember me</label>
       </div>
       <div class="text-center">

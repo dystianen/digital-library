@@ -10,8 +10,10 @@
     <?php
     /** @var \CodeIgniter\Validation\Validation|null $validation */
     $validation = session()->getFlashdata('validation');
+    $currentUrl = current_url();
+    $isAdminRoute = strpos($currentUrl, '/admin') !== false;
     ?>
-    <form role="form" method="POST" action="<?= base_url('register') ?>">
+    <form role="form" method="POST" action="<?= $isAdminRoute ? base_url('admin/register') : base_url('register') ?>">
       <div class="mb-3">
         <input type="text" class="form-control" placeholder="Username" name="username" value="<?= old('username') ?>">
         <?php if ($validation && $validation->hasError('username')) : ?>

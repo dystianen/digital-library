@@ -29,10 +29,26 @@ class DashboardController extends BaseController
         $totalMembers = $this->memberModel->countAllResults();
         $totalBorrowing = $this->borrowingModel->countAllResults();
 
+        $borrowings = $this->borrowingModel->select("MONTH(borrow_date) as month, COUNT(*) as total")
+            ->groupBy("MONTH(borrow_date)")
+            ->orderBy("MONTH(borrow_date)")
+            ->findAll();
+
+        // Siapkan data untuk chart
+        $labels = [];
+        $data = [];
+
+        foreach ($borrowings as $b) {
+            $labels[] = date('F', mktime(0, 0, 0, $b['month'], 1)); // Nama bulan
+            $data[] = (int) $b['total'];
+        }
+
         $data = [
             "totalBooks" => $totalBooks,
             "totalMembers" => $totalMembers,
-            "totalBorrowing" => $totalBorrowing
+            "totalBorrowing" => $totalBorrowing,
+            'chartLabels' => json_encode($labels),
+            'chartData' => json_encode($data)
         ];
 
         return view('admin/dashboard/v_dashboard', $data);

@@ -78,7 +78,7 @@
         <li class="nav-item">
           <a class="nav-link <?= $currentURI === 'admin/books' ? 'active' : '' ?>" href="/admin/books">
             <div class="icon icon-shape icon-sm border-radius-md text-center me-2 d-flex align-items-center justify-content-center">
-              <i class="ni ni-calendar-grid-58 text-dark text-sm opacity-10"></i>
+              <i class="ni ni-books text-dark text-sm opacity-10"></i>
             </div>
             <span class="nav-link-text ms-1">Books</span>
           </a>
@@ -155,8 +155,7 @@
                 document.write(new Date().getFullYear())
               </script>,
               made with <i class="fa fa-heart"></i> by
-              <a href="https://dystianen.vercel.app" class="font-weight-bold" target="_blank">Devyus</a>
-              for a better web.
+              <a href="https://dystianen.vercel.app" class="font-weight-bold" target="_blank">Devyus</a>.
             </div>
           </div>
           <div class="col-lg-6">
@@ -271,6 +270,8 @@
   <script async defer src="https://buttons.github.io/buttons.js"></script>
   <!-- Control Center for Soft Dashboard: parallax effects, scripts for the example pages etc -->
   <script src="../assets/js/argon-dashboard.min.js?v=2.1.0"></script>
+
+  <?= $this->renderSection('scripts') ?>
 </body>
 
 </html>

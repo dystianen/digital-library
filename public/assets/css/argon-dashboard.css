@@ -24266,6 +24266,7 @@ hr.horizontal.gray-light {
 
   .g-sidenav-show .navbar:not(.sidenav).navbar-main .navbar-collapse {
     display: flex !important;
+    justify-content: end;
     flex-basis: auto;
   }
 
@@ -25918,6 +25919,7 @@ hr.horizontal.gray-light {
 
 .page-item.active .page-link {
   box-shadow: 0 7px 14px rgba(50, 50, 93, 0.1), 0 3px 6px rgba(0, 0, 0, 0.08);
+  color: white !important;
 }
 
 .page-item .page-link,
@@ -29101,5 +29103,4 @@ pre[class*="language-"] {
     overflow: auto !important;
   }
 }
-
 /*# sourceMappingURL=dashboard-free.css.map */

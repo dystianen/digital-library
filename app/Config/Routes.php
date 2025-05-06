@@ -11,14 +11,15 @@ $routes->post('/login', 'AuthController::loginStore');
 $routes->get('/register', 'AuthController::registerView');
 $routes->post('/register', 'AuthController::registerStore');
 
+// Kalau mau Register Admin, langsung tembak lewat route
 $routes->get('/admin/register', 'AuthController::registerView');
 $routes->post('/admin/register', 'AuthController::registerStore');
 
 $routes->get('/logout', 'AuthController::logout');
 $routes->get('/', 'HomeController::index');
 
-// Halaman utama, dilindungi auth
 $routes->group('/member', ['filter' => 'authGuard'], function ($routes) {
+  // Borrowing
   $routes->post('borrow/(:num)', 'BorrowingController::borrow/$1');
   $routes->get('borrowed', 'BorrowingController::borrowed');
 });
