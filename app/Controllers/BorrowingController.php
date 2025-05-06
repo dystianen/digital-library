@@ -49,7 +49,6 @@ class BorrowingController extends BaseController
         return view('admin/borrowing/v_borrowing', $data);
     }
 
-
     public function borrow($bookId)
     {
         $book = $this->bookModel->find($bookId);

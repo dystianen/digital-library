@@ -34,7 +34,6 @@ class DashboardController extends BaseController
             ->orderBy("MONTH(borrow_date)")
             ->findAll();
 
-        // Siapkan data untuk chart
         $labels = [];
         $data = [];
 
